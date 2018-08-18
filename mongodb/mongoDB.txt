@@ -1,0 +1,53 @@
+#创建一个学生表信息
+stu={name:'lijian',sex:'male',score:90,age:24}
+#写入十五个不同数据
+db.students.insertMany([
+    {name:'lijian',sex:'male',score:90,age:24},
+	{name:'top',sex:'male',score:20,age:24},
+	{name:'pinguo',sex:'female',score:45,age:24},
+	{name:'apple',sex:'female',score:56,age:24},
+	{name:'li',sex:'male',score:67,age:24},
+	{name:'potato',sex:'male',score:56,age:24},
+	{name:'tomato',sex:'male',score:78,age:24},
+	{name:'nihao',sex:'male',score:98,age:24},
+	{name:'liusang',sex:'female',score:90,age:24},
+	{name:'lisan',sex:'female',score:12,age:24},
+	{name:'ken',sex:'male',score:22,age:24},
+	{name:'ji2',sex:'male',score:78,age:24},
+	{name:'ken21',sex:'female',score:99,age:24},
+	{name:'demaxi',sex:'female',score:45,age:24},
+	{name:'nuokesa',sex:'female',score:65,age:24},
+])
+#查询所有男生数据（只需姓名、年龄）  这里的1 = true  0 = false
+db.students.find({sex:'male'},{name:1,age:true, _id: 0})
+#查询成绩及格的学生信息
+db.students.find({score:{$gte:60}})
+#查询18 岁男生和16 岁女生
+db.students.find(
+	{
+		$or:[
+			{sex:'male',age:16},
+			{sex:'female',age:24}
+		]
+	},{_id:0}
+)
+#按照年龄排序1 正序 0 逆序
+db.students.find().sort({age:1})
+#将所有女生年龄加一岁
+db.students.update({},{$inc:{age:1}},{multi:true})
+
+
+db.students.update({_id:ObjectId("5b74dd8b5d880ab39577fbc0")},{$set:{school:'beida'}})
+
+db.students.update({},{$set:{addrss:'--'}},{multi:true})
+
+
+
+
+
+
+
+
+
+
+
